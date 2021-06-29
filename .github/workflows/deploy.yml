@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "deploy"
   deploy:
     - name: Checkout source code
       uses: actions/checkout@master
@@ -36,5 +36,5 @@ jobs:
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: admin
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
