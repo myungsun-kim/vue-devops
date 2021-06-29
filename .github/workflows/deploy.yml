@@ -17,24 +17,27 @@ on:
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
-    - name: Checkout source code
-      uses: actions/checkout@master
+    runs-on: ubuntu-latest
 
-    - name: Set up Node.js
-      uses: actions/setup-node@master
-      with:
-        node-version: 14.x
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@master
 
-    - name: Install dependencies
-      run: yarn install
+      - name: Set up Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: 14.x
 
-    - name: Build page
-      run: yarn build
-      env:
-        NODE_ENV: production
+      - name: Install dependencies
+        run: yarn install
 
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+      - name: Build page
+        run: yarn build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
